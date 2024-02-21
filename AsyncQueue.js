@@ -51,8 +51,8 @@ class Queue {
 }
 
 class AsyncQueue {
-    values = new Queue();
-    resolvers = new Queue();
+    values = [];
+    resolvers = [];
     #closed = false;
     static EOS = Symbol("End of Stream");
 
