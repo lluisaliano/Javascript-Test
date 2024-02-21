@@ -51,8 +51,8 @@ class Queue {
 }
 
 class AsyncQueue {
-    values = [];
-    resolvers = [];
+    values = new Queue();
+    resolvers = new Queue();
     #closed = false;
     static EOS = Symbol("End of Stream");
 
@@ -114,7 +114,8 @@ class AsyncQueue {
 
 let queue = new AsyncQueue()
 
-for (let i = 0; i <= 5; i++) queue.enqueue(`Nombre ${i}`);
+
+for (let i = 0; i <= 1000000; i++) queue.enqueue(`Nombre ${i}`);
 
 async function eventsStream() {
     for await (let value of queue) {
@@ -123,12 +124,9 @@ async function eventsStream() {
     }
 }
 
-eventsStream().then((value) => {
+eventsStream().then(() => {
     console.log("Queue has been closed");
 })
 
-setTimeout(() => {queue.enqueue("Lluis")}, 3000); // 3s
-setTimeout(() => {queue.enqueue("Tet")}, 6000); // 6s
-setTimeout(() => {queue.enqueue("Try again")}, 7500); // 7,5s
-setTimeout(() => {queue.close()}, 10000); // 7s
+setTimeout(() => {queue.close()}, 1000);
 
