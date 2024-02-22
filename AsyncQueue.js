@@ -64,12 +64,11 @@ class AsyncQueue {
 let queue = new AsyncQueue()
 
 
-for (let i = 0; i <= 1000000; i++) queue.enqueue(`Nombre ${i}`);
+for (let i = 0; i <= 10000; i++) queue.enqueue(`Nombre ${i}`);
 
 async function eventsStream() {
     for await (let value of queue) {
         console.log(value);
-        if (value === AsyncQueue.EOS) return value;
     }
 }
 
@@ -77,5 +76,5 @@ eventsStream().then(() => {
     console.log("Queue has been closed");
 })
 
-setTimeout(() => {queue.close()}, 1000);
+setTimeout(() => {queue.close()}, 4000);
 
