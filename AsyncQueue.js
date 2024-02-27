@@ -78,3 +78,5 @@ eventsStream().then(() => {
 
 setTimeout(() => {queue.close()}, 4000);
 
+console.log("test");
+
